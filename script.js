@@ -12,6 +12,8 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 //Check the canvas size.
 console.log(`canvas size ${canvas.width} : ${canvas.height}`);
 
+//ロード後３秒後に「マウスをクリックしてペイントしよう！10秒でどのくらいペイントできるかな？！」が表示される
+
 //Create ink images and array.
 const blue = new Image();
 blue.src = "images/blue.png";
@@ -31,6 +33,7 @@ const inkImages = [blue, green, skyblue, pink, yellow];
 //Get pixel data of the canvas to identify white and color.
 //Count the white pixel sum.
 //Calculate the percentage of area player painted.
+
 canvas.addEventListener("click", (e) => {
   //JavaScript representation of image HTML element
   const img = inkImages[Math.floor(Math.random() * inkImages.length)];
@@ -64,6 +67,9 @@ canvas.addEventListener("click", (e) => {
   const percentage = (colorCount / (canvas.width * canvas.height)) * 100;
   const percentageRounded = Math.floor(percentage * 100) / 100;
   console.log(`${percentageRounded}%`);
+
+  const finishText = document.getElementById("finishText");
+  finishText.innerHTML = `You painted ${percentageRounded}%!`;
 });
 
 //check rgb color number
@@ -75,10 +81,19 @@ const checkColor = (rgba) => {
   }
 };
 
-//Display percentage of area player painted
+//10秒すぎると、「Times Up！」とキャンバスの上に表示されフリーズする。//マウスをクリックするとカウントダウンがスタート！
+
+//10秒カウントする
+//
+const alertmsg = function () {
+  alert("Times up!!!!");
+};
+
+const myfunc = function () {
+  setTimeout(alertmsg, 10000);
+};
+
 addEventListener("click", () => {
-  const percentageShow = document.getElementById("finishButton");
-  //percentageRoundを表示する
-  const finishText = document.getElementById("finishText");
-  finishText.innerHTML = `You painted a lot! You painted ${e}`;
+  myfunc();
+  removeEventListener();
 });
