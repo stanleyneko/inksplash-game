@@ -8,3 +8,7 @@
   width: 1000px;
   margin: 100 auto;
 }
+
+#myCanvas {
+  border: 1px solid;
+}
