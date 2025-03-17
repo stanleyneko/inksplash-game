@@ -85,21 +85,42 @@ const checkColor = (rgba) => {
 
 //10秒カウントする
 //
-const alertmsg = function () {
-  alert("Times up!!!!Look at how much you painted!");
-};
+// const alertmsg = function () {
+//   alert("Times up!!!!Look at how much you painted!");
+// };
 
-const alertPopout = function () {
-  setTimeout(alertmsg, 10000);
-};
+//animation starts when game ends
+const getEndGameText = document.getElementById("endgameText-animation");
 
-addEventListener("click", () => {
-  alertPopout();
-  removeEventListener();
+canvas.addEventListener("click", () => {
+  const showText = () => {
+    getEndGameText.classList.add("show");
+  };
+  setTimeout(showText, 10000);
+  removeEventListener("click");
 });
 
+// const showGameMessage = () => {
+//   getEndGameText.classList.add("show");
+// };
+
+// setTimeout(getEndGameText, 10000);
+
+// setTimeout(() => {
+//   getEndGameText.classList.add("show");
+// }, 10000);
+
+// const clickHandler = () => {
+//   setTimeout(showGameMessage(), 10000);
+//   removeEventListener;
+// };
+
+// addEventListener("click", () => {
+//   clickHandler();
+// });
+
 //終了時の音
-const playSound = function () {
-  const alertSound = new Audio("audio/whistle.mp3");
-  alertSound.play();
-};
+// const playSound = () => {
+//   const alertSound = new Audio("audio/whistle.mp3");
+//   alertSound.play();
+// };
