@@ -53,16 +53,16 @@ body {
 @keyframes slideIn {
   0% {
     opacity: 0;
-    transform: translateX(-1000%);
+    transform: translateX(-3000px);
   }
   100% {
-    transform: translateX(-10px);
+    transform: translateX(-250px);
     opacity: 1;
   }
 }
 
 .show {
-  animation: slideIn 0.3s cubic-bezier(0.17, 0.67, 0.67, 0.98) forwards;
+  animation: slideIn 0.2s cubic-bezier(0.17, 0.67, 0.67, 0.98) forwards;
 }
 
 #timer {
