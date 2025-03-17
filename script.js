@@ -86,14 +86,20 @@ const checkColor = (rgba) => {
 //10秒カウントする
 //
 const alertmsg = function () {
-  alert("Times up!!!!");
+  alert("Times up!!!!Look at how much you painted!");
 };
 
-const myfunc = function () {
+const alertPopout = function () {
   setTimeout(alertmsg, 10000);
 };
 
 addEventListener("click", () => {
-  myfunc();
+  alertPopout();
   removeEventListener();
 });
+
+//終了時の音
+const playSound = function () {
+  const alertSound = new Audio("audio/whistle.mp3");
+  alertSound.play();
+};
