@@ -7,6 +7,8 @@
 #canvas-frame {
   width: 1000px;
   margin: 0 auto;
+  position: relative;
+  overflow: visible;
 }
 
 #myCanvas {
@@ -34,4 +36,27 @@ body {
   font-family: "Rubik Spray Paint", "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+#endgameText-animation {
+  font-family: "Rubik Spray Paint", "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  background-color: rgb(89, 3, 165);
+  animation: slideIn 0.3s cubic-bezier(0.17, 0.67, 0.67, 0.98) forwards;
+  position: absolute;
+  top: 50%;
+  z-index: 7;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-1000%);
+  }
+  100% {
+    transform: translateX(-10px);
+    opacity: 1;
+  }
 }
