@@ -1,4 +1,4 @@
-//キャンバスを作成する
+//create canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
@@ -11,14 +11,11 @@ const startGame = () => {
 
 startButton.addEventListener("click", startGame);
 
-//透明の背景を白くぬる
+//change canvas background colour to white from transparent
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-//Check the canvas size.
-console.log(`canvas size ${canvas.width} : ${canvas.height}`);
-
-//インクのイメージの変数を作成
+//create ink image variables
 const blue = new Image();
 blue.src = "images/blue.png";
 const green = new Image();
@@ -30,22 +27,24 @@ pink.src = "images/pink.png";
 const yellow = new Image();
 yellow.src = "images/yellow.png";
 
-//インクの配列を作成
+//create ink images array
 const inkImages = [blue, green, skyblue, pink, yellow];
 
-//インクをinkImages配列から取り出し、サイズをランダムに変更
+//get an ink image from inkImages array and change it in random size
 const getInkImages = () => {
   const img = inkImages[Math.floor(Math.random() * inkImages.length)];
-  //100から200pxの間のランダムな大きさにする
+  //generate random numbers between 100 - 200px. This number will be the ink image size
   const size = Math.random() * 100 + 200;
 
   return { img, size };
 };
 
+//when user click on canvas to fire the ink, it will appear where the cursor pointing
 const drawInkImage = (x, y, img, size) => {
   ctx.drawImage(img, x - size / 2, y - size / 2, size, size);
 };
 
+//main methods for all user interactions happening on canvas
 const onCanvasClick = (e) => {
   e.preventDefault();
   const { img, size } = getInkImages();
@@ -53,14 +52,14 @@ const onCanvasClick = (e) => {
   const colorPixels = getPixeldata();
   getPixeldata();
   showPercentage(colorPixels);
-  // Move this into a button on click method
-  // you might need som estate flag, like `isPlaying`
 };
 
+//inactivate click after the game time end
 const removeHandler = () => {
   canvas.removeEventListener("click", onCanvasClick);
 };
 
+//check color code to identify white or color
 const checkColor = (rgba) => {
   if (rgba.r === 255 && rgba.g === 255 && rgba.b === 255) {
     return true;
@@ -69,20 +68,21 @@ const checkColor = (rgba) => {
   }
 };
 
+//check the pixels whether white or color
 const getPixeldata = () => {
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const data = imageData.data;
   let colorCount = 0;
-  //白かカラーを調べ、連想配列に追加していく
+  //check whether white or color
   for (let i = 0; i < data.length; i += 4) {
     const rgba = {};
     rgba.r = data[i];
     rgba.g = data[i + 1];
     rgba.b = data[i + 2];
     rgba.a = data[i + 3];
-    //255であったら白
+    //if its 255 = white
     const isWhite = checkColor(rgba);
-    //255でなかったらカラーなのでカウンターに1追加
+    //if its not 255 = color it counts
     if (!isWhite) {
       colorCount += 1;
     }
@@ -98,9 +98,9 @@ const showPercentage = (colorPixels) => {
   finishText.innerHTML = `You painted ${percentageRounded}%!`;
 };
 
-//animation starts when game ends
 const getEndGameText = document.getElementById("endgameText-animation");
 
+//inactivate click and starts animation to tell the game end
 const endGame = () => {
   removeHandler();
   getEndGameText.classList.add("show");
