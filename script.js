@@ -4,6 +4,9 @@ const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
 
 const startGame = () => {
+  // 1) clear canvas
+  // 2) remove class "show" from end game banner
+  disableButton();
   setTimeout(endGame, 10000);
   canvas.addEventListener("click", onCanvasClick);
   countDownTimer();
@@ -113,7 +116,22 @@ const countDownTimer = () => {
     timer.innerHTML = i;
     i--;
     if (i === -1) {
+      // 1) activate start button
+      // 2) move endGame here
       clearInterval(intervalID);
     }
   }, 1000);
+};
+
+//disable button after click
+const disableButton = () => {
+  startButton.disabled = true;
+  startButton.style.backgroundColor = "gray";
+  startButton.removeEventListener("click", disableButton);
+};
+
+const activateButton = () => {
+  startButton.disabled = false;
+  startButton.style.backgroundColor = "green";
+  startButton.removeEventListener("click", activateButton);
 };
