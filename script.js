@@ -5,9 +5,13 @@ const startButton = document.getElementById("start-button");
 
 const startGame = () => {
   // 1) clear canvas
+  ctx.rect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  ctx.fill();
   // 2) remove class "show" from end game banner
+  getEndGameText.classList.remove("show");
   disableButton();
-  setTimeout(endGame, 10000);
+
   canvas.addEventListener("click", onCanvasClick);
   countDownTimer();
 };
@@ -106,18 +110,20 @@ const getEndGameText = document.getElementById("endgameText-animation");
 //inactivate click and starts animation to tell the game end
 const endGame = () => {
   removeHandler();
+  activateButton();
   getEndGameText.classList.add("show");
 };
 
 const timer = document.getElementById("timer");
 const countDownTimer = () => {
-  let i = 9;
+  let i = 10;
+  timer.innerHTML = i;
   const intervalID = setInterval(() => {
-    timer.innerHTML = i;
     i--;
-    if (i === -1) {
-      // 1) activate start button
-      // 2) move endGame here
+    timer.innerHTML = i;
+
+    if (i === 0) {
+      endGame();
       clearInterval(intervalID);
     }
   }, 1000);
@@ -132,6 +138,5 @@ const disableButton = () => {
 
 const activateButton = () => {
   startButton.disabled = false;
-  startButton.style.backgroundColor = "green";
-  startButton.removeEventListener("click", activateButton);
+  startButton.style.backgroundColor = "orange";
 };
