@@ -40,15 +40,20 @@ body {
 }
 
 #endgameText-animation {
+  width: 100vw;
   font-family: "Rubik Spray Paint", "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 40px;
-  background-color: rgb(89, 3, 165);
+  background-color: yellow;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   position: absolute;
   top: 50%;
   z-index: 7;
   visibility: hidden;
+  display: flex;
+  justify-content: space-around;
 }
 
 @keyframes slideIn {
@@ -57,7 +62,7 @@ body {
     transform: translateX(-3000px);
   }
   100% {
-    transform: translateX(-250px);
+    transform: translateX(0);
     visibility: visible;
   }
 }
